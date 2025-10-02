@@ -20,16 +20,13 @@ public class WarkopService {
     private final CartItem[] cart;
     private int cartCount = 0;
 
-    // ==== KONSTRUKTOR ====
     public WarkopService() {
         catalog = seedCatalog();
         cart = new CartItem[100];
     }
 
-    // ==== DAFTAR MENU (sesuai PDF) ====
     private MenuItem[] seedCatalog() {
         MenuItem[] data = new MenuItem[] {
-            // SNACK / FOOD UTAMA
             new MenuItem("S01", "Kentang Goreng (porsi)", 5000, 'S'),
             new MenuItem("S02", "Pisang Goreng (pcs)",    2000, 'S'),
             new MenuItem("F01", "Mie Goreng",             8000, 'F'),
@@ -38,12 +35,10 @@ public class WarkopService {
             new MenuItem("S03", "Mendoan (pcs)",          2000, 'S'),
             new MenuItem("F04", "Telur Ceplok",           3500, 'F'),
 
-            // ADD TOPPING
             new MenuItem("T01", "Telur Rebus (topping)",  3500, 'F'),
             new MenuItem("T02", "Sosis Goreng (topping)", 3500, 'S'),
             new MenuItem("T03", "Telur Dadar (topping)",  3500, 'F'),
 
-            // MINUMAN
             new MenuItem("D01", "Kopi Sachet",            5000, 'D'),
             new MenuItem("D02", "Cappuccino",             6000, 'D'),
             new MenuItem("D03", "Jeruk (hangat/dingin)",  3000, 'D'),
@@ -59,7 +54,6 @@ public class WarkopService {
         return data;
     }
 
-    // ==== FORMAT TABEL ====
     private static final int W_CODE = 6;
     private static final int W_NAME = 26;
     private static final int W_PRICE = 7;
@@ -88,7 +82,6 @@ public class WarkopService {
                 code, name, price, cat);
     }
 
-    // ==== CETAK KATALOG ====
     public void printCatalog() {
         printHeader();
         for (MenuItem item : catalog) {
@@ -128,7 +121,6 @@ public class WarkopService {
         printLine();
     }
 
-    // ==== FIND ====
     private MenuItem findByCode(String code) {
         code = code.toUpperCase();
         for (MenuItem item : catalog) {
@@ -145,7 +137,6 @@ public class WarkopService {
         return -1;
     }
 
-    // ==== KERANJANG ====
     public void addToCart(String code, int qty) throws ValidationException {
         if (qty <= 0) throw new ValidationException("Kuantitas harus > 0.");
         MenuItem item = findByCode(code);
@@ -202,7 +193,6 @@ public class WarkopService {
                 + W_PRICE + ".0f%n", "Total bayar :", getTotalAfterTax());
     }
 
-    // ==== TOTAL ====
     public double getTotalBeforeTax() {
         double sum = 0;
         for (int i = 0; i < cartCount; i++) {

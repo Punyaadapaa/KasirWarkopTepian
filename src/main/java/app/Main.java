@@ -95,7 +95,7 @@ public class Main {
                     svc.printCart();
                     break;
 
-                case "7": // CHECKOUT (SUDAH DIPERBAIKI)
+                case "7": 
                     if (svc.getTotalBeforeTax() == 0) {
                         System.out.println("Keranjang masih kosong.");
                         break;
@@ -141,7 +141,6 @@ public class Main {
         }
     }
 
-    // Rapikan nama: kapitalisasi tiap kata (contoh manipulasi char[]/String & array)
     private static String formatName(String raw) {
         raw = raw.trim().toLowerCase();
         char[] chars = raw.toCharArray();
