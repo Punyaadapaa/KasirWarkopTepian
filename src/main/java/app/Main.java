@@ -28,6 +28,13 @@ public class Main {
         in.nextLine();
     }
 
+    private static boolean confirm(String prompt) {
+        System.out.print(prompt + " (y/n): ");
+        String s = in.nextLine().trim();
+        char c = s.isEmpty() ? 'N' : Character.toUpperCase(s.charAt(0));
+        return c == 'Y';
+    }
+
     public static void main(String[] args) {
         WarkopService svc = new WarkopService();
 
@@ -50,10 +57,11 @@ public class Main {
             switch (pilih) {
                 case "1":
                     svc.printCatalog();
+                    pause();
                     break;
 
                 case "2":
-                    System.out.print("Masukkan kategori: ");
+                    System.out.print("Masukkan kategori (F/D/S): ");
                     String k = in.nextLine();
                     if (k.isEmpty()) {
                         System.out.println("Kategori kosong.");
@@ -61,12 +69,14 @@ public class Main {
                         char c = Character.toUpperCase(k.charAt(0));
                         svc.printCatalogByCategory(c);
                     }
+                    pause();
                     break;
 
                 case "3":
                     System.out.print("Keyword: ");
                     String q = in.nextLine();
                     svc.searchCatalog(q);
+                    pause();
                     break;
 
                 case "4":
@@ -82,22 +92,30 @@ public class Main {
                     } catch (ValidationException ve) {
                         System.out.println("Gagal: " + ve.getMessage());
                     }
+                    pause();
                     break;
 
                 case "5":
                     System.out.print("Kode menu yang dihapus: ");
                     String rm = in.nextLine();
-                    boolean ok = svc.removeFromCart(rm);
-                    System.out.println(ok ? "Berhasil dihapus." : "Kode tidak ditemukan.");
+                    if (confirm("Yakin hapus item " + rm + "?")) {
+                        boolean ok = svc.removeFromCart(rm);
+                        System.out.println(ok ? "Berhasil dihapus." : "Kode tidak ditemukan.");
+                    } else {
+                        System.out.println("Dibatalkan.");
+                    }
+                    pause();
                     break;
 
                 case "6":
                     svc.printCart();
+                    pause();
                     break;
 
                 case "7": 
                     if (svc.getTotalBeforeTax() == 0) {
                         System.out.println("Keranjang masih kosong.");
+                        pause();
                         break;
                     }
                     System.out.print("Nama pelanggan: ");
@@ -109,16 +127,13 @@ public class Main {
                     svc.printCart();
                     System.out.println("============================\n");
 
-                    System.out.print("Ketik 'Y' untuk konfirmasi pembayaran: ");
-                    String line = in.nextLine().trim();                     // ← BACA SEKALI
-                    char conf = line.isEmpty() ? 'N' : Character.toUpperCase(line.charAt(0));
-
-                    if (conf == 'Y') {
+                    if (confirm("Konfirmasi pembayaran")) {
                         System.out.println("Pembayaran selesai. Terima kasih!");
                         svc.clearCart();
                     } else {
                         System.out.println("Dibatalkan.");
                     }
+                    pause();
                     break;
 
                 case "0":
@@ -127,15 +142,7 @@ public class Main {
 
                 default:
                     System.out.println("Menu tidak dikenal.");
-            }
-
-            pause();
-            System.out.print("\nKembali ke menu utama? (y/n): ");
-            String s = in.nextLine();
-            char again = s.isEmpty() ? 'N' : Character.toUpperCase(s.charAt(0));
-            if (again != 'Y') {
-                System.out.println("Program selesai.");
-                return;
+                    pause();
             }
             System.out.println();
         }
