@@ -41,8 +41,8 @@ public class Main {
         while (true) {
             header();
             System.out.println("Menu:");
-            System.out.println("1. Lihat Semua Katalog");
-            System.out.println("2. Lihat Katalog per Kategori");
+            System.out.println("1. Lihat Semua Daftar Menu");
+            System.out.println("2. Lihat Daftar Menu per Kategori");
             System.out.println("3. Cari Menu");
             System.out.println("4. Tambah ke Keranjang");
             System.out.println("5. Hapus dari Keranjang");
