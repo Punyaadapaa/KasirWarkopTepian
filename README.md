@@ -88,6 +88,7 @@ Struktur package dan class:
 
 <img width="175" height="275" alt="image" src="https://github.com/user-attachments/assets/567a85aa-a22b-41b6-a065-d3b1e3fbfa97" />
 <h3>Link Video Youtube</h3>
+https://youtu.be/nauEJZBPSOc?si=yIE3ryR-MyS45C0-
 <h3>Petunjuk Cara Menjalankan Program</h3>
 <h4>1. Buka Project di NetBeans</h4>
 
